@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using System.Web.Http.Cors;
 
 namespace MvcAngularCrud
 {
@@ -13,6 +14,8 @@ namespace MvcAngularCrud
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.EnableCors(new EnableCorsAttribute("*",headers:"*",methods:"*"));//   [EnableCors(origins: "*",headers:"*",methods:"*")]
+
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
@@ -25,6 +28,8 @@ namespace MvcAngularCrud
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
+            config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
         }
     }
 }

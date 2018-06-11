@@ -1,0 +1,35 @@
+<form class="emp-form" #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input type="hidden" name="EmployeeID" #EmployeeID="ngModel" [(ngModel)]="employeeService.selectedEmployee.EmployeeID">
+      <input class="form-control" name="FirstName" placeholder="FirstName" #FirstName= "ngModel" [(ngModel)]="employeeService.selectedEmployee.FirstName" required>
+  <div class="validation-error" *ngIf="FirstName.invalid && FirstName.touched" >This field is required.</div>
+
+    </div>
+    <div class="form-group col-md-6">
+      <input class="form-control" name="LastName" placeholder="LastName" #LastName= "ngModel" [(ngModel)]="employeeService.selectedEmployee.LastName" required>
+<div class="validation-error" *ngIf="LastName.invalid && LastName.touched">Last name is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input class="form-control" name="Position" placeholder="Position" #Position="ngModel" [(ngModel)]="employeeService.selectedEmployee.Position">
+  </div>
+
+  <div class="form-row">
+  <div class="form-group col-md-6">
+    <input class="form-control" name="EmpCode" placeholder="EmpCode" #EmpCode ="ngModel" [(ngModel)]="employeeService.selectedEmployee.EmpCode">
+  </div>
+  <div class="form-group col-md-6">
+    <input class="form-control" name="Office" placeholder="Office" #Office="ngModel" [(ngModel)]="employeeService.selectedEmployee.Office">
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-8">
+<button [disabled]="!employeeForm.valid" type="submit" class="btn btn-lg btn-block btn-info" ><i class="fa fa-floppy-o">&nbsp;</i>Submit</button>
+  </div>
+<div class="form-group col-md-4">
+  <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(employeeForm)" ><i class="fa fa-repeat">&nbsp;</i>Reset</button>
+</div>
+</div>
+</form>
